@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+  dns: 
+    image: coredns/coredns
+    restart: always
+    command: -conf /etc/coredns/Corefile
+    ports:
+      - 53:53/udp
+    volumes:
+      - ./conf:/etc/coredns
+    labels:
+      - "traefik.enable=false"      
+    network_mode: host 
