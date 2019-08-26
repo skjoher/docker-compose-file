@@ -1,0 +1,52 @@
+{
+    "addresses": {
+        "dns": "0.0.0.0",
+        "grpc": "0.0.0.0",
+        "http": "0.0.0.0",
+        "https": "0.0.0.0"
+    },
+    "advertise_addr": "192.168.1.99",
+    "advertise_addr_wan": "192.168.1.99",
+    "bind_addr": "192.168.1.99",
+    "bootstrap": true,
+    "client_addr": "0.0.0.0",
+    "data_dir": "/var/consul",
+    "datacenter": "0x7f",
+    "disable_update_check": false,
+    "domain": "consul",
+    "enable_local_script_checks": false,
+    "enable_script_checks": false,
+    "enable_syslog": true,
+    "encrypt": "XorRq8JWh5bdIyqClui3gA==",
+    "log_level": "INFO",
+    "node_name": "server01",
+    "performance": {
+        "leave_drain_time": "5s",
+        "raft_multiplier": 1,
+        "rpc_hold_timeout": "7s"
+    },
+    "ports": {
+        "dns": 8600,
+        "grpc": -1,
+        "http": 8500,
+        "https": -1,
+        "serf_lan": 8301,
+        "serf_wan": 8302,
+        "server": 8300
+    },
+    "raft_protocol": 3,
+    "recursors": [
+        "1.1.1.1",
+        "8.8.8.8"
+    ],
+    "retry_interval": "30s",
+    "retry_interval_wan": "30s",
+    "retry_join": [
+        "192.168.1.99"
+    ],
+    "retry_max": 0,
+    "retry_max_wan": 0,
+    "server": true,
+    "syslog_facility": "local0",
+    "ui": true
+}

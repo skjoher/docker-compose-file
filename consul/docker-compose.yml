@@ -1,0 +1,25 @@
+version: '3'
+services:
+# consul with dev mode
+  consul:
+    image: consul
+    restart: always
+    container_name: consul_server
+    network_mode: host          # asking consul to work with my laptop all network adapters
+    ports:
+      - "8600:8600/udp"
+      - "8500:8500"
+    command: consul agent -dev -client=0.0.0.0      # running consul in dev mode im-memory data
+    labels:
+      - SERVICE_IGNORE # Tell Registrator to ignore this container
+
+# registrator listing on docker and registrator service into consul with service lable
+
+  registrator:
+    container_name: registrator
+    command: -internal consul://127.0.0.1:8500
+    network_mode: host 
+    image: gliderlabs/registrator:master
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock

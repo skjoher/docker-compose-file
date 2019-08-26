@@ -1,0 +1,67 @@
+# version: '3'
+# services:
+# # consul with dev mode
+#   consul:
+#     image: consul
+#     restart: always
+#     container_name: consul_server
+#     network_mode: bridge          # asking consul to work with my laptop all network adapters
+#     ports:
+#       - "8600:8600/udp"
+#       - "8500:8500"
+#     command: consul agent -dev -client=0.0.0.0      # running consul in dev mode im-memory data
+#     labels:
+#       - SERVICE_IGNORE # Tell Registrator to ignore this container
+
+#   registrator:
+#     container_name: registrator
+#     command: -internal consul://127.0.0.1:8500
+#     network_mode: host 
+#     image: gliderlabs/registrator:latest
+#     restart: always
+#     volumes:
+#       - /var/run/docker.sock:/tmp/docker.sock
+
+
+
+## with config file & server mode
+  # consul:
+  #   build:
+  #     context: ./consul
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 8500:8500
+  #   command: agent -server -bind 0.0.0.0 -client 0.0.0.0 -bootstrap-expect 1 -config-file=/consul/config/config.json
+  #   volumes:
+  #     - ./consul/config/consul-config.json:/consul/config/config.json
+  #     - ./consul/data:/consul/data
+
+
+# # for network based setup
+#     image: consul
+#     container_name: consul_server
+#     restart: alway
+#     ports:
+#         - "8500:8500"
+#     environment:
+#         - 'CONSUL_ALLOW_PRIVILEGED_PORTS='
+#     volumes:
+#         - ./config/server.json:/consul/config/server.json:ro
+#     entrypoint:
+#         - consul
+#         - agent
+#         - -config-file=/consul/config/server.json
+#         - -client=0.0.0.0
+#         - -dns-port=53
+#         - -recursor=8.8.8.8
+#     networks:
+#         infranet:
+#             ipv4_address: 172.200.0.200
+    
+
+# networks:
+#     infranet:
+#         ipam:
+#             config:
+#                 - subnet: 172.200.0.0/24
+#                   gateway: 172.200.0.1
