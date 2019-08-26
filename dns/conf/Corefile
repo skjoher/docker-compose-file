@@ -1,16 +1,8 @@
 .:53 {
-    hosts /etc/coredns/Hosts 0x7f.me {
-        127.0.0.1 git.0x7f.me
-        fallthrough
-    }
-    forward . 8.8.8.8
-    errors stdout
-    autopath /etc/coredns/zonefile.conf
+    file /etc/coredns/0x7f.me 0x7f.me
+    forward . 8.8.8.8:53
+    log
 }
-0x7f.me {
-    proxy . 127.0.0.1:8600
-    rewrite stop {
-        name regex (.*)\.0x7f\.me {1}.service.consul
-        answer name (.*)\.service\.consul {1}.0x7f.me
-    }
+service.consul {
+    forward . 172.17.0.1:8600
 }
